@@ -6,8 +6,13 @@ import { IconButton } from "@material-ui/core";
 const Favorite = (props) => {
     const [fav, setFav] = useState(false);
     const favorite = (id) => {
-        localStorage.setItem(`fav${id}`, true);
+      localStorage.setItem(`fav${id}`, true);
         setFav(true)
+        if(fav){
+          setFav(false);
+          console.log(fav)
+          localStorage.removeItem(`fav${id}`);
+        }
       }
     const checkFavs = () =>{
         setFav(localStorage.getItem(`fav${props.id}`))
@@ -21,7 +26,10 @@ const Favorite = (props) => {
       <>
     <CardActions>
       <IconButton aria-label="add to favorites" onClick={() => favorite(props.id)} >
-          {fav ? <FavoriteIcon color="secondary" /> : <FavoriteIcon />} 
+          {fav ? <>
+          <FavoriteIcon color="secondary" />
+          </>
+           : <FavoriteIcon />} 
       </IconButton>
     </CardActions>
 

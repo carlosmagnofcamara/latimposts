@@ -10,6 +10,7 @@ import { Card, CardContent, Divider, Typography } from "@material-ui/core";
 import Header from "../Header";
 import Loader from "../Loader";
 import Users from "../content/Users";
+import Favorite from "../content/Favorite";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -106,6 +107,7 @@ const PostsPage = () => {
                     {body}
                   </Typography>
                 </CardContent>
+                <Favorite id={id}/>
               </Card>
               <div style={{ margin: "20px" }}>
                 <i>
@@ -114,9 +116,7 @@ const PostsPage = () => {
                   </Typography>
                 </i>
               </div>
-
               <br />
-
               {commentsControl}
             </div>
           </Container>
