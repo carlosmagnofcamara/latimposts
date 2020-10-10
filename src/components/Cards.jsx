@@ -51,7 +51,6 @@ const Cards = ({ id, comments, title, body, link, children }) => {
               <b>{title}</b>
             </Typography>
           )}
-
           <Typography>{body.slice(0, 100)}...</Typography>
           {comments ? (
             <>
