@@ -11,8 +11,8 @@ import Favorite from "./Favorite";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: 275,
-    maxWidth: 280,
+    minWidth: 250,
+    maxWidth: 400,
     margin: 20,
   },
   bullet: {

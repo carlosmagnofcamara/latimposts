@@ -6,10 +6,16 @@ import { IconButton } from "@material-ui/core";
 const Favorite = (props) => {
     const [fav, setFav] = useState(false);
     const favorite = (id) => {
-        localStorage.setItem(`fav${id}`, id);
+        localStorage.setItem(`fav${id}`, true);
         setFav(true)
       }
+    const checkFavs = () =>{
+        setFav(localStorage.getItem(`fav${props.id}`))
+    }
 
+    useEffect(()=>{
+        checkFavs()
+    },[])
 
   return (
       <>
