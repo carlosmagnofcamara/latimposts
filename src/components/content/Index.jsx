@@ -12,7 +12,9 @@ const Content = () => {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
   const [loader, setLoader] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(
+    localStorage.getItem("page") || 1
+  );
   const [postsPerPage] = useState(10);
 
   const getDatas = useCallback(async () => {
@@ -21,7 +23,7 @@ const Content = () => {
     const dataComments = await CommentsService.getComments();
     setUsers(dataUsers.data);
     setPosts(dataPosts.data);
-    setComments(dataComments.data)
+    setComments(dataComments.data);
     setLoader(false);
   }, []);
 
@@ -47,7 +49,7 @@ const Content = () => {
         body={element.body}
         users={users}
         comments={comments}
-      />     
+      />
     );
   });
 
@@ -58,10 +60,17 @@ const Content = () => {
       ) : (
         <>
           <Header titulo="Welcome to LatimPosts" bool={false} />
-          <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', backgroundColor: 'white' }}>
-          {postsControl}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-around",
+              backgroundColor: "white",
+            }}
+          >
+            {postsControl}
           </div>
-          
+
           <Footer
             postsPerPage={postsPerPage}
             totalPosts={posts.length}

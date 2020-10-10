@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Comments from "../content/Comments";
 import CommentService from "../../services/comments";
@@ -8,6 +8,7 @@ import PostService from "../../services/posts";
 import Container from "../../Container";
 import { Card, CardContent, Typography } from "@material-ui/core";
 import Header from "../Header";
+import Footer from '../Footer';
 import Loader from "../Loader";
 import Users from "../content/Users";
 import Favorite from "../content/Favorite";
@@ -41,8 +42,10 @@ const PostsPage = () => {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
   const [loader, setLoader] = useState(true);
+  const [postsPerPage] = useState(10);
   const { id } = useParams();
   const classes = useStyles();
+  const history = useHistory();
 
   const getDatas = useCallback(async () => {
     const dataUsers = await UserService.getUsers();
@@ -57,6 +60,11 @@ const PostsPage = () => {
   useEffect(() => {
     getDatas();
   }, [getDatas]);
+
+  const paginate = (pageNumber) => {
+    localStorage.setItem('page', pageNumber);
+    history.push('/')
+  };
 
   const commentsControl = comments.map((element) => {
     if (Number(id) === Number(element.postId)) {
@@ -120,6 +128,12 @@ const PostsPage = () => {
               {commentsControl}
             </div>
           </Container>
+
+          <Footer
+            postsPerPage={postsPerPage}
+            totalPosts={posts.length}
+            paginate={paginate}
+          />
         </>
       )}
     </>
