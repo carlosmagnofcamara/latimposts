@@ -7,6 +7,7 @@ import Loader from "../Loader";
 import Header from "../Header";
 import CommentsService from "../../services/comments";
 import { Container } from "@material-ui/core";
+import { Div } from '../styles';
 
 const Content = () => {
   const [users, setUsers] = useState([]);
@@ -64,16 +65,9 @@ const Content = () => {
         <>
         <Container>
         <Header titulo="Welcome to LatimPosts" bool={false} />
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-around",
-              backgroundColor: "white",
-            }}
-          >
-            {postsControl}
-          </div>
+          <Div>
+          {postsControl}
+          </Div>
 
           <Footer
             postsPerPage={postsPerPage}
