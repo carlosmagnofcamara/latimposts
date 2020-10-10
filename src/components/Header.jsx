@@ -20,7 +20,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = (props) => {
   const classes = useStyles();
-
+  const changePageComment = () =>{
+    localStorage.removeItem('pageComment')
+  }
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -29,7 +31,7 @@ const Header = (props) => {
       {props.titulo}
     </Typography>
     {props.bool ? (
-      <Button color="inherit" component={Link} to='/' >Back</Button>
+      <Button color="inherit" onClick={()=>changePageComment()} component={Link} to='/' >Back</Button>
     )
   :
   (

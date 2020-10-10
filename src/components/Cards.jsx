@@ -7,7 +7,6 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Favorite from "./Favorite";
-import Users from "../components/content/Users";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +39,7 @@ const Cards = ({ id, comments, title, body, link, children }) => {
             <Typography
               variant="h5"
               component="p"
+              onClick={() => localStorage.setItem('pageComment', 1)}
               style={{ textDecoration: "none" }}
               component={Link}
               to={{ pathname: `posts/${id}` }}
@@ -72,6 +72,7 @@ const Cards = ({ id, comments, title, body, link, children }) => {
           <CardActions>
             <Button
               size="small"
+              onClick={() => localStorage.setItem('pageComment', 1)}
               component={Link}
               to={{ pathname: `posts/${id}` }}
             >

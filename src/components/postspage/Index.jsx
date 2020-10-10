@@ -45,7 +45,7 @@ const PostsPage = () => {
 
   const paginate = (pageNumber) => {
     setCurrentComment(pageNumber)
-    localStorage.setItem('page', pageNumber); //envia a pagina clicada via localstorage para o component content/index
+    localStorage.setItem('pageComment', pageNumber); //envia a pagina clicada via localstorage para o component content/index
     //history.push('/')
   };
 
@@ -72,7 +72,6 @@ const PostsPage = () => {
     }
   });
   const commentsControl = teste.map((element) => {
-    if (Number(id) === Number(element.postId)) {
       return (
         <Comments
           key={element.id}
@@ -81,7 +80,6 @@ const PostsPage = () => {
           comment={element.body}
         />
       );
-    }
   });
   return (
     <>
