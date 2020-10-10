@@ -3,7 +3,6 @@ import React, { useState } from "react";
 
 const Footer = ({postsPerPage, totalPosts, paginate}) => {
     const pageNumbers = [];
-
     for(let i = 1; i <= Math.ceil(totalPosts/postsPerPage); i++){
         pageNumbers.push(i);
     }

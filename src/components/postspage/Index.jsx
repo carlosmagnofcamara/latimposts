@@ -13,6 +13,7 @@ import Users from "../content/Users";
 import Cards from '../Cards';
 
 const PostsPage = () => {
+  let commentPost = 0;
   let userId = 0;
   let userName = "";
   let email = "";
@@ -22,6 +23,8 @@ const PostsPage = () => {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
   const [loader, setLoader] = useState(true);
+  const [currentComment, setCurrentComment] = useState(1)
+  const [commentPerPage] = useState(2);
   const [postsPerPage] = useState(10);
   const { id } = useParams();
   const history = useHistory();
@@ -41,20 +44,18 @@ const PostsPage = () => {
   }, [getDatas]);
 
   const paginate = (pageNumber) => {
+    setCurrentComment(pageNumber)
     localStorage.setItem('page', pageNumber); //envia a pagina clicada via localstorage para o component content/index
-    history.push('/')
+    //history.push('/')
   };
 
-  const commentsControl = comments.map((element) => {
+  const lastComment = currentComment * commentPerPage;
+  const firstComment = lastComment - commentPerPage;
+  const teste = comments.slice(firstComment, lastComment)
+  
+  comments.map((element) => {
     if (Number(id) === Number(element.postId)) {
-      return (
-        <Comments
-          key={element.id}
-          name={element.name}
-          email={element.email}
-          comment={element.body}
-        />
-      );
+      commentPost++;
     }
   });
   posts.map((element) => {
@@ -70,7 +71,18 @@ const PostsPage = () => {
       email = element.email;
     }
   });
-
+  const commentsControl = teste.map((element) => {
+    if (Number(id) === Number(element.postId)) {
+      return (
+        <Comments
+          key={element.id}
+          name={element.name}
+          email={element.email}
+          comment={element.body}
+        />
+      );
+    }
+  });
   return (
     <>
       {loader ? (
@@ -103,8 +115,8 @@ const PostsPage = () => {
             </div>
           </Container>
           <Footer
-            postsPerPage={postsPerPage}
-            totalPosts={posts.length}
+            postsPerPage={commentPerPage}
+            totalPosts={commentPost}
             paginate={paginate}
           />
         </>
