@@ -10,7 +10,7 @@ const Footer = ({postsPerPage, totalPosts, paginate}) => {
   return (
       <nav style={{textAlign: 'center', margin: '20px 0px'}}>
               {pageNumbers.map((element)=>{
-                  return <Button color="primary" onClick={()=> paginate(element)}>{element}</Button>
+                  return <Button key={element} color="primary" onClick={()=> paginate(element)}>{element}</Button>
               })}
       </nav>
   );

@@ -7,7 +7,7 @@ import PostService from "../../services/posts";
 import Container from "../../Container";
 import { Divider, Typography } from "@material-ui/core";
 import Header from "../Header";
-import Loader from '../Loader';
+import Loader from "../Loader";
 
 const PostsPage = () => {
   let userId = 0;
@@ -61,42 +61,45 @@ const PostsPage = () => {
       email = element.email;
     }
   });
-  
+
   return (
     <>
-    {
-      loader ? (
-       <Loader />
-      )
-      :
-      (
+      {loader ? (
+        <Loader />
+      ) : (
         <>
-        <Container>
-        <Header titulo={`This is a post from ${userName}, leave your comment`} bool={true} />
-        <div style={{textAlign: 'center'}}>
-          <Typography variant="h4" gutterBottom>
-            {titulo}
-          </Typography>
-        </div>
-        <div>
-          <Typography variant="h6" gutterBottom>
-            <i>{`${userName} <${email}>`}</i>
-          </Typography>
-        </div>
-       
-        <div>
-          <Typography variant="h5" gutterBottom>
-            {body}
-          </Typography>
-        </div>
-        <br />
-        <Divider variant="middle" />
-        <i><Typography variant="subtitle1" gutterBottom>Comments</Typography></i>
-        {commentsControl}
-      </Container>
+          <Container>
+            <Header
+              titulo={`This is a post from ${userName}, leave your comment`}
+              bool={true}
+            />
+            <div style={{ textAlign: "center" }}>
+              <Typography variant="h4" gutterBottom>
+                {titulo}
+              </Typography>
+            </div>
+            <div>
+              <Typography variant="h6" gutterBottom>
+                <i>{`${userName} <${email}>`}</i>
+              </Typography>
+            </div>
+
+            <div>
+              <Typography variant="h5" gutterBottom>
+                {body}
+              </Typography>
+            </div>
+            <br />
+            <Divider variant="middle" />
+            <i>
+              <Typography variant="subtitle1" gutterBottom>
+                Comments
+              </Typography>
+            </i>
+            {commentsControl}
+          </Container>
         </>
-      )
-    }
+      )}
     </>
   );
 };
