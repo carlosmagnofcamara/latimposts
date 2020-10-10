@@ -68,15 +68,19 @@ const Cards = ({ id, comments, title, body, link, children }) => {
             false
           )}
         </CardContent>
-        <CardActions>
-          <Button
-            size="small"
-            component={Link}
-            to={{ pathname: `posts/${id}` }}
-          >
-            Learn More
-          </Button>
-        </CardActions>
+        {link ? (
+          <CardActions>
+            <Button
+              size="small"
+              component={Link}
+              to={{ pathname: `posts/${id}` }}
+            >
+              Learn More
+            </Button>
+          </CardActions>
+        ) : (
+          false
+        )}
         <Favorite id={id} />
       </Card>
     </>
