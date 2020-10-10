@@ -37,6 +37,7 @@ const Content = () => {
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
+    localStorage.setItem('page', pageNumber); //te mantém na mesma pagina após reload
   };
 
   const postsControl = currentPost.map((element) => {

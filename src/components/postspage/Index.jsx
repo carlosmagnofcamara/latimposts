@@ -62,7 +62,7 @@ const PostsPage = () => {
   }, [getDatas]);
 
   const paginate = (pageNumber) => {
-    localStorage.setItem('page', pageNumber);
+    localStorage.setItem('page', pageNumber); //envia a pagina clicada via localstorage para o component content/index
     history.push('/')
   };
 
@@ -128,7 +128,6 @@ const PostsPage = () => {
               {commentsControl}
             </div>
           </Container>
-
           <Footer
             postsPerPage={postsPerPage}
             totalPosts={posts.length}
