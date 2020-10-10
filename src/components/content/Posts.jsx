@@ -49,12 +49,13 @@ const Posts = ({ id, post, title, body, users, comments }) => {
           <i>{totalOfcomments} comments</i>
         </Typography>
         <Typography
-          variant="body2"
+          variant="h6"
           component="p"
+          style={{textDecoration: 'none'}}
           component={Link}
           to={{ pathname: `posts/${id}` }}
         >
-          {title}
+          <b >{title}</b>
           <br />
         </Typography>
         <Typography>
