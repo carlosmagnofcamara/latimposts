@@ -37,6 +37,7 @@ const Cards = ({ id, comments, title, body, link, children }) => {
         <CardContent>
           {children}
           {link ? (
+            <>
             <Typography
               variant="h5"
               component="p"
@@ -46,10 +47,15 @@ const Cards = ({ id, comments, title, body, link, children }) => {
             >
               <b>{title}</b>
             </Typography>
+            <Typography>{body.slice(0, 100)}...</Typography>
+            </>
           ) : (
+            <>
             <Typography variant="h5" component="p">
               <b>{title}</b>
             </Typography>
+            <Typography>{body}</Typography>
+            </>
           )}
 
           <Typography>{body.slice(0, 100)}...</Typography>
