@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 
 const Footer = ({postsPerPage, totalPosts, paginate}) => {
     const pageNumbers = [];
@@ -10,7 +10,10 @@ const Footer = ({postsPerPage, totalPosts, paginate}) => {
   return (
       <nav style={{textAlign: 'center', margin: '20px 0px'}}>
               {pageNumbers.map((element)=>{
-                  return <Button key={element} color="primary" onClick={()=> paginate(element)}>{element}</Button>
+                  if(element === Number(localStorage.getItem('page'))){
+                    return <Button key={element} color="primary" variant='outlined' onClick={()=>paginate(element)}>{element}</Button>
+                  }
+                  return <Button key={element} color="primary" onClick={()=>paginate(element)}>{element}</Button>
               })}
       </nav>
   );

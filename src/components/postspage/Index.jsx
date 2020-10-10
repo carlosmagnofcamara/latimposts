@@ -1,36 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import { useHistory, useParams } from "react-router-dom";
 import Comments from "../content/Comments";
 import CommentService from "../../services/comments";
 import UserService from "../../services/users";
 import PostService from "../../services/posts";
 import Container from "../../Container";
-import { Card, CardContent, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import Header from "../Header";
 import Footer from '../Footer';
 import Loader from "../Loader";
 import Users from "../content/Users";
-import Favorite from "../content/Favorite";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    minWidth: 250,
-    maxWidth: "100%",
-    margin: 20,
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-}));
+import Cards from '../Cards';
 
 const PostsPage = () => {
   let userId = 0;
@@ -44,7 +24,6 @@ const PostsPage = () => {
   const [loader, setLoader] = useState(true);
   const [postsPerPage] = useState(10);
   const { id } = useParams();
-  const classes = useStyles();
   const history = useHistory();
 
   const getDatas = useCallback(async () => {
@@ -78,14 +57,14 @@ const PostsPage = () => {
       );
     }
   });
-  const postsControl = posts.map((element) => {
+  posts.map((element) => {
     if (Number(id) === Number(element.id)) {
       userId = element.userId;
       titulo = element.title;
       body = element.body;
     }
   });
-  const usersControl = users.map((element) => {
+  users.map((element) => {
     if (element.id === userId) {
       userName = element.name;
       email = element.email;
@@ -104,19 +83,12 @@ const PostsPage = () => {
                 titulo={`This is a post from ${userName}, leave your comment`}
                 bool={true}
               />
-              <Card className={classes.root}>
-                <CardContent>
-                  <Typography variant="h4" gutterBottom>
-                    {titulo}
-                  </Typography>
-                  <Users name={userName} email={email} />
-                  <br />
-                  <Typography variant="h5" gutterBottom>
-                    {body}
-                  </Typography>
-                </CardContent>
-                <Favorite id={id}/>                
-              </Card>
+              <Cards id={id} body={body} title={titulo} link={false} >
+                <Users name={userName} email={email} />
+              </Cards>
+              
+              {/* divisor área de commentarios */}
+
               <div style={{ margin: "20px" }}>
                 <i>
                   <Typography variant="subtitle1" gutterBottom>
@@ -124,7 +96,9 @@ const PostsPage = () => {
                   </Typography>
                 </i>
               </div>
+              
               <br />
+
               {commentsControl}
             </div>
           </Container>

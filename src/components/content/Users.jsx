@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(16),
     flexBasis: "33.33%",
     flexShrink: 0,
   },
@@ -17,9 +17,12 @@ const Users = ({ name, email }) => {
     <Typography className={classes.heading}>
       {name}
       </Typography>
-      <Typography variant="h5" component="h2">
-      {` <${email}>`}      
+      <Typography variant="subtitle2" component="h2">
+        <i>
+        {` <${email}>`} 
+        </i>
     </Typography>
+    <br />
     </>
   );
 };

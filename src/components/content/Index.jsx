@@ -6,6 +6,7 @@ import Footer from "../Footer";
 import Loader from "../Loader";
 import Header from "../Header";
 import CommentsService from "../../services/comments";
+import { Container } from "@material-ui/core";
 
 const Content = () => {
   const [users, setUsers] = useState([]);
@@ -38,6 +39,7 @@ const Content = () => {
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
     localStorage.setItem('page', pageNumber); //te mantém na mesma pagina após reload
+    window.scrollTo(0, 0)
   };
 
   const postsControl = currentPost.map((element) => {
@@ -60,7 +62,8 @@ const Content = () => {
         <Loader />
       ) : (
         <>
-          <Header titulo="Welcome to LatimPosts" bool={false} />
+        <Container>
+        <Header titulo="Welcome to LatimPosts" bool={false} />
           <div
             style={{
               display: "flex",
@@ -77,6 +80,7 @@ const Content = () => {
             totalPosts={posts.length}
             paginate={paginate}
           />
+        </Container>
         </>
       )}
     </>
