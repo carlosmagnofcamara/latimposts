@@ -6,7 +6,7 @@ import CommentService from "../../services/comments";
 import UserService from "../../services/users";
 import PostService from "../../services/posts";
 import Container from "../../Container";
-import { Card, CardContent, Divider, Typography } from "@material-ui/core";
+import { Card, CardContent, Typography } from "@material-ui/core";
 import Header from "../Header";
 import Loader from "../Loader";
 import Users from "../content/Users";
@@ -107,7 +107,7 @@ const PostsPage = () => {
                     {body}
                   </Typography>
                 </CardContent>
-                <Favorite id={id}/>
+                <Favorite id={id}/>                
               </Card>
               <div style={{ margin: "20px" }}>
                 <i>
