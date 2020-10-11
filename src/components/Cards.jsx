@@ -57,8 +57,6 @@ const Cards = ({ id, comments, title, body, link, children }) => {
             <Typography>{body}</Typography>
             </>
           )}
-
-          <Typography>{body.slice(0, 100)}...</Typography>
           {comments ? (
             <>
               <Typography className={classes.pos} color="textSecondary">
