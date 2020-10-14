@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Comments from "../content/Comments";
 import CommentService from "../../services/comments";
 import UserService from "../../services/users";
 import PostService from "../../services/posts";
 import Container from "../../Container";
-import { Typography } from "@material-ui/core";
 import Header from "../Header";
 import Footer from '../Footer';
 import Loader from "../Loader";
@@ -25,9 +24,7 @@ const PostsPage = () => {
   const [loader, setLoader] = useState(true);
   const [currentComment, setCurrentComment] = useState(1)
   const [commentPerPage] = useState(2);
-  const [postsPerPage] = useState(10);
   const { id } = useParams();
-  const history = useHistory();
 
   const getDatas = useCallback(async () => {
     const dataUsers = await UserService.getUsers();
@@ -46,7 +43,6 @@ const PostsPage = () => {
   const paginate = (pageNumber) => {
     setCurrentComment(pageNumber)
     localStorage.setItem('pageComment', pageNumber); //envia a pagina clicada via localstorage para o component content/index
-    //history.push('/')
   };
 
   const lastComment = currentComment * commentPerPage;
@@ -99,11 +95,9 @@ const PostsPage = () => {
               
               {/* divisor área de commentarios */}
 
-              <div style={{ margin: "20px" }}>
+              <div style={{ marginTop: "40px", marginLeft: '40px', fontSize: '16px' }}>
                 <i>
-                  <Typography variant="subtitle1" gutterBottom>
                     Comments bellow
-                  </Typography>
                 </i>
               </div>
               

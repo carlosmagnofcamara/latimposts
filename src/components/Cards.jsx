@@ -1,83 +1,49 @@
-import React, { Children } from "react";
-import { Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
+import React from "react";
 import Favorite from "./Favorite";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    minWidth: 250,
-    maxWidth: 400,
-    margin: 20,
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-}));
+import { Card, CardTitle, CardBody, Button, StyledLink } from "./styles";
 
 const Cards = ({ id, comments, title, body, link, children }) => {
-  const classes = useStyles();
   let totalOfcomments = 0;
   return (
     <>
-      <Card className={classes.root}>
-        <CardContent>
-          {children}
-          {link ? (
-            <Typography
-              variant="h5"
-              component="p"
-              onClick={() => localStorage.setItem('pageComment', 1)}
-              style={{ textDecoration: "none" }}
-              component={Link}
-              to={{ pathname: `posts/${id}` }}
-            >
-              <b>{title}</b>
-            </Typography>
-          ) : (
-            <Typography variant="h5" component="p">
-              <b>{title}</b>
-            </Typography>
-          )}
-          <Typography>{body.slice(0, 100)}...</Typography>
-          {comments ? (
-            <>
-              <Typography className={classes.pos} color="textSecondary">
-                {comments.map((data) => {
-                  if (data.postId === id) {
-                    totalOfcomments++;
-                  }
-                })}
-                <i>{totalOfcomments} comments</i>
-              </Typography>
-            </>
-          ) : (
-            false
-          )}
-        </CardContent>
+      <Card>
+        {children}
         {link ? (
-          <CardActions>
-            <Button
-              size="small"
-              onClick={() => localStorage.setItem('pageComment', 1)}
-              component={Link}
-              to={{ pathname: `posts/${id}` }}
-            >
+          <>
+          <StyledLink to={{ pathname: `posts/${id}` }}>
+            <CardTitle onClick={() => localStorage.setItem("pageComment", 1)}>
+              {title}
+            </CardTitle>
+            </StyledLink>
+            <CardBody>{body.slice(0, 100)}...</CardBody>
+          </>
+        ) : (
+          <>
+            <CardTitle>{title}</CardTitle>
+            <CardBody>{body}</CardBody>
+          </>
+        )}
+
+        {comments ? (
+          <>
+            <CardBody secondary>
+              {comments.map((data) => {
+                if (data.postId === id) {
+                  totalOfcomments++;
+                }
+              })}
+              <i>{totalOfcomments} comments</i>
+            </CardBody>
+          </>
+        ) : (
+          false
+        )}
+        {link ? (
+          <StyledLink primary to={{ pathname: `posts/${id}` }}>
+          <Button onClick={() => localStorage.setItem("pageComment", 1)}>
               Learn More
-            </Button>
-          </CardActions>
+          </Button>
+          </StyledLink>
         ) : (
           false
         )}

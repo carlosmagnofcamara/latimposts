@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import CardActions from "@material-ui/core/CardActions";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { IconButton } from "@material-ui/core";
 import {
@@ -8,6 +7,7 @@ import {
   TwitterShareButton,
   TwitterIcon,
 } from "react-share";
+import { SocialMedias } from "./styles";
 
 const Favorite = (props) => {
   const [fav, setFav] = useState(false);
@@ -30,33 +30,33 @@ const Favorite = (props) => {
 
   return (
     <>
-      <CardActions>
-        <IconButton
+    <SocialMedias>
+    <IconButton
           aria-label="add to favorites"
           onClick={() => favorite(props.id)}
         >
           {fav ? (
             <>
-              <FavoriteIcon color="secondary" />
+              <FavoriteIcon color="secondary" /> 
             </>
           ) : (
             <>
-              <FavoriteIcon />
+              <FavoriteIcon /> 
             </>
           )}
         </IconButton>
         <FacebookShareButton
           url={`https://latimposts.herokuapp.com/posts/${props.id}`}
         >
-          <FacebookIcon size={32} round={true} />
+          <FacebookIcon size={40} round={true} /> 
         </FacebookShareButton>
 
         <TwitterShareButton
           url={`https://latimposts.herokuapp.com/posts/${props.id}`}
         >
-          <TwitterIcon size={32} round={true} />
+          <TwitterIcon size={40} round={true} />
         </TwitterShareButton>
-      </CardActions>
+    </SocialMedias>
     </>
   );
 };

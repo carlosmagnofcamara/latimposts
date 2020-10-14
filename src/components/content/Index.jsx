@@ -6,7 +6,6 @@ import Footer from "../Footer";
 import Loader from "../Loader";
 import Header from "../Header";
 import CommentsService from "../../services/comments";
-import { Container } from "@material-ui/core";
 import { Div } from '../styles';
 
 const Content = () => {
@@ -63,7 +62,6 @@ const Content = () => {
         <Loader />
       ) : (
         <>
-        <Container>
         <Header titulo="Welcome to LatimPosts" bool={false} />
           <Div>
           {postsControl}
@@ -74,7 +72,6 @@ const Content = () => {
             totalPosts={posts.length}
             paginate={paginate}
           />
-        </Container>
         </>
       )}
     </>
