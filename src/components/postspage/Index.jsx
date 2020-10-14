@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Comments from "../content/Comments";
 import CommentService from "../../services/comments";
 import UserService from "../../services/users";
 import PostService from "../../services/posts";
 import Container from "../../Container";
-import { Typography } from "@material-ui/core";
 import Header from "../Header";
 import Footer from '../Footer';
 import Loader from "../Loader";
@@ -13,6 +12,7 @@ import Users from "../content/Users";
 import Cards from '../Cards';
 
 const PostsPage = () => {
+  let commentPost = 0;
   let userId = 0;
   let userName = "";
   let email = "";
@@ -22,9 +22,9 @@ const PostsPage = () => {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
   const [loader, setLoader] = useState(true);
-  const [postsPerPage] = useState(10);
+  const [currentComment, setCurrentComment] = useState(1)
+  const [commentPerPage] = useState(2);
   const { id } = useParams();
-  const history = useHistory();
 
   const getDatas = useCallback(async () => {
     const dataUsers = await UserService.getUsers();
@@ -41,20 +41,17 @@ const PostsPage = () => {
   }, [getDatas]);
 
   const paginate = (pageNumber) => {
-    localStorage.setItem('page', pageNumber); //envia a pagina clicada via localstorage para o component content/index
-    history.push('/')
+    setCurrentComment(pageNumber)
+    localStorage.setItem('pageComment', pageNumber); //envia a pagina clicada via localstorage para o component content/index
   };
 
-  const commentsControl = comments.map((element) => {
+  const lastComment = currentComment * commentPerPage;
+  const firstComment = lastComment - commentPerPage;
+  const teste = comments.slice(firstComment, lastComment)
+  
+  comments.map((element) => {
     if (Number(id) === Number(element.postId)) {
-      return (
-        <Comments
-          key={element.id}
-          name={element.name}
-          email={element.email}
-          comment={element.body}
-        />
-      );
+      commentPost++;
     }
   });
   posts.map((element) => {
@@ -70,7 +67,16 @@ const PostsPage = () => {
       email = element.email;
     }
   });
-
+  const commentsControl = teste.map((element) => {
+      return (
+        <Comments
+          key={element.id}
+          name={element.name}
+          email={element.email}
+          comment={element.body}
+        />
+      );
+  });
   return (
     <>
       {loader ? (
@@ -89,11 +95,9 @@ const PostsPage = () => {
               
               {/* divisor área de commentarios */}
 
-              <div style={{ margin: "20px" }}>
+              <div style={{ marginTop: "40px", marginLeft: '40px', fontSize: '16px' }}>
                 <i>
-                  <Typography variant="subtitle1" gutterBottom>
                     Comments bellow
-                  </Typography>
                 </i>
               </div>
               
@@ -103,8 +107,8 @@ const PostsPage = () => {
             </div>
           </Container>
           <Footer
-            postsPerPage={postsPerPage}
-            totalPosts={posts.length}
+            postsPerPage={commentPerPage}
+            totalPosts={commentPost}
             paginate={paginate}
           />
         </>
