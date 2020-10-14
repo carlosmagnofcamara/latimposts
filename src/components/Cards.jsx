@@ -6,32 +6,6 @@ const Cards = ({ id, comments, title, body, link, children }) => {
   let totalOfcomments = 0;
   return (
     <>
-<<<<<<< HEAD
-      <Card className={classes.root}>
-        <CardContent>
-          {children}
-          {link ? (
-            <>
-            <Typography
-              variant="h5"
-              component="p"
-              style={{ textDecoration: "none" }}
-              component={Link}
-              to={{ pathname: `posts/${id}` }}
-            >
-              <b>{title}</b>
-            </Typography>
-            <Typography>{body.slice(0, 100)}...</Typography>
-            </>
-          ) : (
-            <>
-            <Typography variant="h5" component="p">
-              <b>{title}</b>
-            </Typography>
-            <Typography>{body}</Typography>
-            </>
-          )}
-=======
       <Card>
         {children}
         {link ? (
@@ -49,7 +23,6 @@ const Cards = ({ id, comments, title, body, link, children }) => {
             <CardBody>{body}</CardBody>
           </>
         )}
->>>>>>> origin/styledcomponents
 
         {comments ? (
           <>
