@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "./styles";
+import { Button, Pagination } from "./styles";
 
 interface Props {
   postsPerPage: number;
@@ -15,7 +15,7 @@ const Footer: React.FC<Props> = ({ postsPerPage, totalPosts, paginate }) => {
     <>
       {localStorage.getItem("pageComment") ? (
         <>
-          <nav style={{ textAlign: "center", margin: "20px 0px" }}>
+          <Pagination>
             {pageNumbers.map((element) => {
               if (element === Number(localStorage.getItem("pageComment"))) {
                 return (
@@ -43,11 +43,11 @@ const Footer: React.FC<Props> = ({ postsPerPage, totalPosts, paginate }) => {
                 </Button>
               );
             })}
-          </nav>
+          </Pagination>
         </>
       ) : (
         <>
-          <nav style={{ textAlign: "center", margin: "20px 0px" }}>
+          <Pagination>
             {pageNumbers.map((element) => {
               if (element === Number(localStorage.getItem("postpage"))) {
                 return (
@@ -72,7 +72,7 @@ const Footer: React.FC<Props> = ({ postsPerPage, totalPosts, paginate }) => {
                 </Button>
               );
             })}
-          </nav>
+          </Pagination>
         </>
       )}
     </>

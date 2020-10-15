@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import PostPage from './components/postspage/Index';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import './index.css';
 
 ReactDOM.render(
   <BrowserRouter>

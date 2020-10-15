@@ -44,8 +44,9 @@ color:${(props: any) => props.secondary ? 'grey' : 'black' };
 export const Button = styled.button<Props>`
     font-size: 16px;
     font-weight: ${(props: any) => props.paginate ? 'lighter' : 'bolder'};
-    padding: 10px;
+    padding: 10px 15px;
     outline: none;
+    margin: 3px 3px;
     border: none;
     border-radius: 3px;
     &:hover {
@@ -64,7 +65,6 @@ export const StyledLink = styled(Link)<Props>`
         text-decoration: none;
         color: ${(props: any) => props.primary ? 'white' : 'black'};
     }
-
 `;
 
 export const SocialMedias = styled.div`
@@ -88,5 +88,11 @@ export const NavTitle = styled.h1`
 font-size: 16px;
 font-weight: lighter;
 font-family: sans-serif;
+`;
+
+export const Pagination = styled.nav`
+width: 100%;
+text-align: center;
+margin: auto;
 `;
 

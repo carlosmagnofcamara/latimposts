@@ -10,6 +10,7 @@ import {
 import { SocialMedias } from "./styles";
 
 const Favorite = (props: any) => {
+  
   const [fav, setFav] = useState(false);
   const favorite = (id: number) => {
     localStorage.setItem(`fav${id}`, (true).toString());
