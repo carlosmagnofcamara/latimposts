@@ -9,10 +9,10 @@ import {
 } from "react-share";
 import { SocialMedias } from "./styles";
 
-const Favorite = (props) => {
+const Favorite = (props: any) => {
   const [fav, setFav] = useState(false);
-  const favorite = (id) => {
-    localStorage.setItem(`fav${id}`, true);
+  const favorite = (id: number) => {
+    localStorage.setItem(`fav${id}`, (true).toString());
     setFav(true);
     if (fav) {
       setFav(false);
@@ -21,7 +21,8 @@ const Favorite = (props) => {
     }
   };
   const checkFavs = () => {
-    setFav(localStorage.getItem(`fav${props.id}`));
+    const check: any = localStorage.getItem(`fav${props.id}`);
+    setFav(check?check:null);
   };
 
   useEffect(() => {

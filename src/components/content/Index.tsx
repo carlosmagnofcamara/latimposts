@@ -8,10 +8,30 @@ import Header from "../Header";
 import CommentsService from "../../services/comments";
 import { Div } from '../styles';
 
-const Content = () => {
-  const [users, setUsers] = useState([]);
-  const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]);
+interface IUser {
+  id: number;
+  name: string;
+  email: string;
+}
+
+interface IPost {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
+interface IComments {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
+}
+const Content: React.FC = () => {
+  const [users, setUsers] = useState<IUser[]>();
+  const [posts, setPosts] = useState<IPost[]>();
+  const [comments, setComments] = useState<IComments[]>();
   const [loader, setLoader] = useState(true);
   const [currentPage, setCurrentPage] = useState(
     localStorage.getItem("postpage") || 1
@@ -19,9 +39,9 @@ const Content = () => {
   const [postsPerPage] = useState(10);
 
   const getDatas = useCallback(async () => {
-    const dataUsers = await UserService.getUsers();
-    const dataPosts = await PostService.getPosts();
-    const dataComments = await CommentsService.getComments();
+    const dataUsers = await UserService.getUsers(null);
+    const dataPosts = await PostService.getPosts(null);
+    const dataComments = await CommentsService.getComments(null);
     setUsers(dataUsers.data);
     setPosts(dataPosts.data);
     setComments(dataComments.data);
@@ -32,17 +52,17 @@ const Content = () => {
     getDatas();
   }, [getDatas]);
 
-  const lastPost = currentPage * postsPerPage;
+  const lastPost = Number(currentPage) * postsPerPage;
   const firstPost = lastPost - postsPerPage;
-  const currentPost = posts.slice(firstPost, lastPost);
+  const currentPost = posts?.slice(firstPost, lastPost);
 
-  const paginate = (pageNumber) => {
+  const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-    localStorage.setItem('postpage', pageNumber); //te mantém na mesma pagina após reload
+    localStorage.setItem('postpage', pageNumber.toString()); //te mantém na mesma pagina após reload
     window.scrollTo(0, 0)
   };
 
-  const postsControl = currentPost.map((element) => {
+  const postsControl = currentPost?.map((element) => {
     return (
       <Posts
         key={element.id}
@@ -50,8 +70,8 @@ const Content = () => {
         post={element}
         title={element.title}
         body={element.body}
-        users={users}
-        comments={comments}
+        users={[users]}
+        comments={[comments]}
       />
     );
   });
@@ -69,7 +89,7 @@ const Content = () => {
 
           <Footer
             postsPerPage={postsPerPage}
-            totalPosts={posts.length}
+            totalPosts={posts?.length}
             paginate={paginate}
           />
         </>

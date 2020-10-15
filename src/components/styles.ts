@@ -1,14 +1,20 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const Div = styled.div`
+interface Props{
+    primary: boolean;
+    secondary: boolean;
+    paginate: boolean;
+}
+
+export const Div = styled.div`
 display: flex;
 flex-wrap: wrap;
 justify-content: space-around;
 background-color: white;
 `;
 
-const Card = styled.div`
+export const Card = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: space-around;
@@ -20,54 +26,54 @@ max-width: 400px;
 box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.75);
 `;
 
-const CardTitle = styled.h1`
+export const CardTitle = styled.h1`
 font-family: sans-serif;
 font-weight: bolder;
 font-size: 20px;
 margin: 0;
 `;
 
-const CardBody = styled.h3`
+export const CardBody = styled.h3<Props>`
 font-family: sans-serif;
 font-weight: lighter;
 font-size: 16px;
 margin: 10px;
-color:${props=>props.secondary ? 'grey' : 'black' };
+color:${(props: any) => props.secondary ? 'grey' : 'black' };
 `;
 
-const Button = styled.button`
+export const Button = styled.button<Props>`
     font-size: 16px;
-    font-weight: ${props => props.paginate ? 'lighter' : 'bolder'};
+    font-weight: ${(props: any) => props.paginate ? 'lighter' : 'bolder'};
     padding: 10px;
     outline: none;
     border: none;
     border-radius: 3px;
     &:hover {
-        background-color: ${props=> props.paginate ? '#9448BC' : '#FF99C8' };
+        background-color: ${(props: any) => props.paginate ? '#9448BC' : '#FF99C8' };
         border: none;
         color: white;
     }
-background-color: ${props=> props.paginate ? 'white' : '#9448BC' };
-color: ${props=> props.paginate ? '#9448BC' : 'white' };
+background-color: ${(props: any) => props.paginate ? 'white' : '#9448BC' };
+color: ${(props: any)=> props.paginate ? '#9448BC' : 'white' };
 `;
 
-const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)<Props>`
     text-decoration: none;
-    color: ${props => props.primary ? 'white' : 'black'};
+    color: ${(props: any) => props.primary ? 'white' : 'black'};
     &:focus, &:hover, &:visited, &:link, &:active {
         text-decoration: none;
-        color: ${props => props.primary ? 'white' : 'black'};
+        color: ${(props: any) => props.primary ? 'white' : 'black'};
     }
 
 `;
 
-const SocialMedias = styled.div`
+export const SocialMedias = styled.div`
     display: flex;
     margin-top: 20px;
     justify-content: space-around;
 `;
 
-const AppBar = styled.nav`
+export const AppBar = styled.nav`
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -78,10 +84,9 @@ position: static;
     width: 100%;
 `;
 
-const NavTitle = styled.h1`
+export const NavTitle = styled.h1`
 font-size: 16px;
 font-weight: lighter;
 font-family: sans-serif;
 `;
 
-export { Div, Card, CardTitle, CardBody, Button, StyledLink, SocialMedias, AppBar, NavTitle }

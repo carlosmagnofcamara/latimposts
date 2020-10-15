@@ -10,26 +10,53 @@ import Footer from '../Footer';
 import Loader from "../Loader";
 import Users from "../content/Users";
 import Cards from '../Cards';
+import { Texts } from './styles';
+
+
+interface IUser {
+  id: number;
+  name: string;
+  email: string;
+}
+
+interface IPost {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
+interface IComments {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
+}
+
+interface Param {
+  id: number;
+}
 
 const PostsPage = () => {
-  let commentPost = 0;
-  let userId = 0;
-  let userName = "";
-  let email = "";
-  let titulo = "";
-  let body = "";
-  const [users, setUsers] = useState([]);
-  const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]);
+  let commentPost: number = 0;
+  let userId: number = 0;
+  let userName: string = "";
+  let email: string = "";
+  let titulo: string = "";
+  let body: string = "";
+  const [users, setUsers] = useState<IUser[]>();
+  const [posts, setPosts] = useState<IPost[]>();
+  const [comments, setComments] = useState<IComments[]>();
   const [loader, setLoader] = useState(true);
   const [currentComment, setCurrentComment] = useState(1)
   const [commentPerPage] = useState(2);
-  const { id } = useParams();
+  const { id }: any = useParams();
 
   const getDatas = useCallback(async () => {
-    const dataUsers = await UserService.getUsers();
-    const dataPosts = await PostService.getPosts();
-    const dataComments = await CommentService.getComments();
+    const dataUsers = await UserService.getUsers(null);
+    const dataPosts = await PostService.getPosts(null);
+    const dataComments = await CommentService.getComments(null);
     setUsers(dataUsers.data);
     setPosts(dataPosts.data);
     setComments(dataComments.data);
@@ -40,34 +67,35 @@ const PostsPage = () => {
     getDatas();
   }, [getDatas]);
 
-  const paginate = (pageNumber) => {
+  const paginate = (pageNumber: number) => {
     setCurrentComment(pageNumber)
-    localStorage.setItem('pageComment', pageNumber); //envia a pagina clicada via localstorage para o component content/index
+    localStorage.setItem('pageComment', pageNumber.toString()); //envia a pagina clicada via localstorage para o component content/index
   };
 
   const lastComment = currentComment * commentPerPage;
   const firstComment = lastComment - commentPerPage;
-  const teste = comments.slice(firstComment, lastComment)
+  const teste = comments?.slice(firstComment, lastComment)
   
-  comments.map((element) => {
-    if (Number(id) === Number(element.postId)) {
+  comments?.map((element) => {
+    if (Number(id) === element.postId) {
       commentPost++;
     }
   });
-  posts.map((element) => {
-    if (Number(id) === Number(element.id)) {
+  posts?.map((element) => {
+
+    if (Number(id) === element.id) {
       userId = element.userId;
       titulo = element.title;
       body = element.body;
     }
   });
-  users.map((element) => {
+  users?.map((element) => {
     if (element.id === userId) {
       userName = element.name;
       email = element.email;
     }
   });
-  const commentsControl = teste.map((element) => {
+  const commentsControl = teste?.map((element) => {
       return (
         <Comments
           key={element.id}
@@ -89,16 +117,16 @@ const PostsPage = () => {
                 titulo={`This is a post from ${userName}, leave your comment`}
                 bool={true}
               />
-              <Cards id={id} body={body} title={titulo} link={false} >
+              <Cards id={id} body={body} title={titulo} link={false} comments={[comments]} >
                 <Users name={userName} email={email} />
               </Cards>
               
               {/* divisor área de commentarios */}
 
               <div style={{ marginTop: "40px", marginLeft: '40px', fontSize: '16px' }}>
-                <i>
+                <Texts>
                     Comments bellow
-                </i>
+                </Texts>
               </div>
               
               <br />

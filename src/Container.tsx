@@ -1,7 +1,11 @@
 import React from 'react';
 import GlobalStyle from './global';
 
-export default (props) => {
+interface Props {
+
+}
+
+const Container: React.FC<Props> = (props) => {
   return (
       <>
       <GlobalStyle>
@@ -10,3 +14,5 @@ export default (props) => {
       </>
   );
 }
+
+export default Container;

@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Button, NavTitle, StyledLink } from './styles';
 
-const Header = (props) => {
+const Header = (props: any) => {
   const changePageComment = () =>{
     localStorage.removeItem('pageComment')
   }
@@ -13,8 +13,16 @@ const Header = (props) => {
         </NavTitle>
       
     {props.bool ? (
-      <StyledLink to='/' primary>
-      <Button color="inherit" onClick={()=>changePageComment()}>
+      <StyledLink 
+      secondary={false}
+      paginate={false}
+      primary={true}
+      to='/'>
+      <Button 
+      secondary={false}
+      paginate={false}
+      primary={false}
+      color="inherit" onClick={()=>changePageComment()}>
           Back
         </Button>
         </StyledLink>

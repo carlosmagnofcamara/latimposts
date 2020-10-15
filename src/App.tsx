@@ -3,13 +3,13 @@ import Content from "./components/content/Index";
 import Container from "./Container";
 import "./App.css";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <>
+      <div>
       <Container>
         <Content />
       </Container>
-    </>
+      </div>
   );
 }
 

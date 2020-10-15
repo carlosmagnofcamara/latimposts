@@ -1,6 +1,12 @@
 import React from "react";
 import { Button } from "./styles";
-const Footer = ({ postsPerPage, totalPosts, paginate }) => {
+
+interface Props {
+  postsPerPage: number;
+  totalPosts: any;
+  paginate:any;
+}
+const Footer: React.FC<Props> = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
@@ -14,6 +20,9 @@ const Footer = ({ postsPerPage, totalPosts, paginate }) => {
               if (element === Number(localStorage.getItem("pageComment"))) {
                 return (
                   <Button
+                  secondary={false}
+                  paginate={false}
+                  primary={false}
                     key={element}
                     value={element}
                     onClick={() => paginate(element)}
@@ -24,8 +33,9 @@ const Footer = ({ postsPerPage, totalPosts, paginate }) => {
               }
               return (
                 <Button
-                  paginate
-                  primary
+                secondary={false}
+                paginate={true}
+                primary={true}
                   key={element}
                   onClick={() => paginate(element)}
                 >
@@ -41,15 +51,20 @@ const Footer = ({ postsPerPage, totalPosts, paginate }) => {
             {pageNumbers.map((element) => {
               if (element === Number(localStorage.getItem("postpage"))) {
                 return (
-                  <Button key={element} onClick={() => paginate(element)}>
+                  <Button 
+                  secondary={false}
+                  paginate={false}
+                  primary={true}
+                  key={element} onClick={() => paginate(element)}>
                     {element}
                   </Button>
                 );
               }
               return (
                 <Button
-                  paginate
-                  primary
+                secondary={false}
+                paginate={true}
+                primary={true}
                   key={element}
                   onClick={() => paginate(element)}
                 >

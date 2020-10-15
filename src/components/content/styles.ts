@@ -21,6 +21,7 @@ const Author = styled.h5`
 font-size: 16px;
 margin: 0;
 font-weight: lighter;
+font-family: sans-serif;
 `;
 
 export {TitleComments, BodyComments, Author };

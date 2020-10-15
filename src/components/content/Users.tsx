@@ -1,7 +1,11 @@
 import React from "react";
 import {Author} from './styles';
 
-const Users = ({ name, email }) => {
+interface Props {
+  name: string;
+  email: string;
+}
+const Users: React.FC<Props> = ({ name, email }) => {
   return (
     <>
     <Author>
