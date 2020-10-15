@@ -7,7 +7,7 @@ import {
   TwitterShareButton,
   TwitterIcon,
 } from "react-share";
-import { SocialMedias } from "./styles";
+import { SocialMedias } from "../styles";
 
 const Favorite = (props: any) => {
   

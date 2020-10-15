@@ -1,6 +1,6 @@
 import React from "react";
 import Users from "./Users";
-import Cards from "../Cards";
+import Cards from "../cards/Cards";
 
 interface Props {
   id: number;

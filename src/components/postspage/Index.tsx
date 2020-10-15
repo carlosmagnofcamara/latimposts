@@ -5,11 +5,11 @@ import CommentService from "../../services/comments";
 import UserService from "../../services/users";
 import PostService from "../../services/posts";
 import Container from "../../Container";
-import Header from "../Header";
-import Footer from '../Footer';
-import Loader from "../Loader";
+import Header from "../header/Header";
+import Footer from '../footer/Footer';
+import Loader from "../../Loader";
 import Users from "../content/Users";
-import Cards from '../Cards';
+import Cards from '../cards/Cards';
 import { Texts } from './styles';
 
 

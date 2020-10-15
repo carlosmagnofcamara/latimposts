@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./Header";
+import Header from "./components/header/Header";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Container from '../Container';
+import Container from './Container';
 
 const Loader = () => {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Pagination } from "./styles";
+import { Button, Pagination } from "../styles";
 
 interface Props {
   postsPerPage: number;

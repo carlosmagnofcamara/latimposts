@@ -1,6 +1,6 @@
 import React from "react";
-import Favorite from "./Favorite";
-import { Card, CardTitle, CardBody, Button, StyledLink } from "./styles";
+import Favorite from "../Favorite";
+import { Card, CardTitle, CardBody, Button, StyledLink } from "../styles";
 
 interface Props {
   id: number;

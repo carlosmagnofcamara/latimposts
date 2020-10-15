@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import UserService from "../../services/users";
 import PostService from "../../services/posts";
 import Posts from "./Posts";
-import Footer from "../Footer";
-import Loader from "../Loader";
-import Header from "../Header";
+import Footer from "../footer/Footer";
+import Loader from "../../Loader";
+import Header from "../header/Header";
 import CommentsService from "../../services/comments";
 import { Div } from '../styles';
 

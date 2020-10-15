@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Button, NavTitle, StyledLink } from './styles';
+import { AppBar, Button, NavTitle, StyledLink } from '../styles';
 
 const Header = (props: any) => {
   const changePageComment = () =>{
